@@ -1,0 +1,1 @@
+=slub_solr_doc=
