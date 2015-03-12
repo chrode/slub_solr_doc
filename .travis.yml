@@ -1,0 +1,29 @@
+language: php
+
+php:
+  - 5.4
+  - 5.5
+  - 5.6
+
+env:
+  - DB=mysql DEV_BRANCH=SOLR_DOC
+
+notifications:
+  email:
+    - christof.rodejohann@slub-dresden.de
+
+before_script:
+  - cd ..
+  - git clone --single-branch --branch $DEV_BRANCH https://github.com/chrode/SlubBaseDistribution
+  - mv SlubBaseDistribution/* .
+  - sudo apt-get install parallel
+  - composer self-update
+  - composer install
+  - mkdir -p uploads typo3temp typo3conf/ext
+  - mv slub_solr_doc typo3conf/slub_solr_doc/
+
+script:
+  - >
+    echo;
+    echo "Running unit tests";
+    ./bin/phpunit --colors -c typo3conf/ext/slub_solr_doc/Tests/Build/UnitTests.xml
