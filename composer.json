@@ -23,6 +23,6 @@
         "solarium/solarium": "~3.3"
     },
     "replace": {
-        "typo3-ter/slub_doc": "*"
+        "typo3-ter/slub_solr_doc": "*"
     }
 }
